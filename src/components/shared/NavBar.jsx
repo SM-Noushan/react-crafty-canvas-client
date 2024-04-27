@@ -1,7 +1,69 @@
 import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { FaCaretDown } from "react-icons/fa6";
+
+const nestedNavlinks = () => (
+  <>
+    <NavLink
+      to="/item/view/all"
+      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    >
+      View All
+    </NavLink>
+    <NavLink
+      to="/item/add"
+      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    >
+      Add Item
+    </NavLink>
+  </>
+);
+
+const navlinks = () => (
+  <div className="menu lg:menu-horizontal gap-2 lg:gap-4 text-xl">
+    <NavLink
+      to="/"
+      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    >
+      Home
+    </NavLink>
+    <details className="w-full list-none lg:hidden">
+      <summary className="list-none flex gap-1 items-center">
+        Art & Craft
+        <FaCaretDown className="mb-1" />
+      </summary>
+      <div className="pt-6 ml-4 -mt-4 flex flex-col">{nestedNavlinks()}</div>
+    </details>
+    <div className="hidden lg:block dropdown dropdown-hover">
+      <div tabIndex={0} role="button" className="flex gap-1 items-center">
+        Art & Craft
+        <FaCaretDown className="mb-1" />
+      </div>
+      <ul
+        tabIndex={0}
+        className="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-32 text-xl space-y-1.5"
+      >
+        {nestedNavlinks()}
+      </ul>
+    </div>
+    <NavLink
+      to="/about-us"
+      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    >
+      About
+    </NavLink>
+    <NavLink
+      to="/contact-us"
+      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    >
+      Contact
+    </NavLink>
+  </div>
+);
 
 const NavBar = () => {
   const [theme, setTheme] = React.useState("light");
+  const user = null;
 
   React.useEffect(() => {
     const localTheme = localStorage.getItem("theme", theme);
@@ -21,11 +83,11 @@ const NavBar = () => {
     }
   };
   return (
-    <section className="drawer">
+    <section className="drawer container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="w-full navbar bg-base-300">
+        <div className="w-full navbar">
           <div className="flex-none lg:hidden">
             <label
               htmlFor="my-drawer-3"
@@ -47,57 +109,82 @@ const NavBar = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">Crafty Canvas</div>
-          <div className="flex-1 px-2 mx-2 justify-end">
-            <label className="cursor-pointer grid place-items-center">
-              <input
-                onChange={handleThemeToggle}
-                checked={theme === "light" ? false : true}
-                type="checkbox"
-                value=""
-                className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
-              />
-              <svg
-                className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="5" />
-                <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-              </svg>
-              <svg
-                className="col-start-2 row-start-1 stroke-base-100 fill-base-100"
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg>
-            </label>
-          </div>
-          <div className="flex-none hidden lg:block">
+          <Link
+            to="/"
+            className="px-2 mx-2 font-rajdhani text-xl lg:text-4xl font-semibold"
+          >
+            Crafty Canvas
+          </Link>
+          <div className="hidden lg:block flex-1 text-center">
             {/* Navbar menu content here */}
-            <ul className="menu menu-horizontal">
-              <li>
-                <a>Home</a>
-              </li>
-              <li>
-                <a>About Us</a>
-              </li>
-            </ul>
+            {navlinks()}
+          </div>
+          <div className="flex-1 lg:flex-none px-2 mx-2 justify-end lg:justify-normal">
+            <div className="flex gap-4 items-center">
+              <label className="cursor-pointer grid place-items-center">
+                <input
+                  onChange={handleThemeToggle}
+                  checked={theme === "light" ? false : true}
+                  type="checkbox"
+                  value=""
+                  className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
+                />
+                <svg
+                  className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                </svg>
+                <svg
+                  className="col-start-2 row-start-1 stroke-base-100 fill-base-100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </label>
+              {user ? (
+                <div className="dropdown lg:dropdown-hover">
+                  <div tabIndex={0} role="button" className="avatar">
+                    <div className="size-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 cursor-pointer">
+                      <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    </div>
+                  </div>
+
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 cursor-pointer text-base lg:text-xl space-y-1.5"
+                  >
+                    <Link>Profile</Link>
+                    <Link>My Art & Craft List</Link>
+                    <button className="text-left">Logout</button>
+                  </ul>
+                </div>
+              ) : (
+                <div className="space-x-2 text-base lg:text-xl hover:*:underline">
+                  <Link>Login</Link>
+                  <Link>Register</Link>
+                </div>
+              )}
+              {/* <div className="skeleton size-12 rounded-full" /> */}
+              {/* <div className="skeleton w-16 h-4 rounded-sm" /> */}
+            </div>
           </div>
         </div>
       </div>
@@ -109,12 +196,16 @@ const NavBar = () => {
         ></label>
         {/* Sidebar content here */}
         <ul className="menu p-4 w-80 min-h-full bg-base-200">
-          <li>
-            <a>Home</a>
-          </li>
-          <li>
-            <a>About Us</a>
-          </li>
+          {navlinks()}
+          {/* <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "text-blue-500" : "text-xl"
+            }
+          >
+            Home
+          </NavLink>
+          <NavLink>Home</NavLink> */}
         </ul>
       </div>
     </section>
