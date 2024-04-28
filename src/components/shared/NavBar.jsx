@@ -4,6 +4,7 @@ import { FaCaretDown } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { ThemeContext } from "../../layouts/Root";
+import { Tooltip } from "react-tooltip";
 
 const nestedNavlinks = () => (
   <>
@@ -179,7 +180,20 @@ const NavBar = () => {
               {authLoading ? (
                 <div className="skeleton size-12 rounded-full" />
               ) : user ? (
-                <div className="dropdown lg:dropdown-hover">
+                <div
+                  data-tooltip-id="user-tooltip"
+                  data-tooltip-place="right"
+                  data-tooltip-variant="info"
+                  className="dropdown dropdown-end lg:dropdown-hover mt-0"
+                >
+                  <Tooltip id="user-tooltip">
+                    <h3 className="text-base font-medium">
+                      Greeting,{" "}
+                      <span className="bg-gradient-to-r from-pink-500 to-yellow-500 text-transparent bg-clip-text">
+                        {user?.displayName || "Artisan"}
+                      </span>
+                    </h3>
+                  </Tooltip>
                   <div tabIndex={0} role="button" className="avatar">
                     <div className="size-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 cursor-pointer">
                       <img
@@ -195,7 +209,7 @@ const NavBar = () => {
                     tabIndex={0}
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 cursor-pointer text-base lg:text-xl space-y-1.5"
                   >
-                    <Link>Profile</Link>
+                    <Link to="/profile">Profile</Link>
                     <Link>My Art & Craft List</Link>
                     <button className="text-left" onClick={handleLogout}>
                       Logout

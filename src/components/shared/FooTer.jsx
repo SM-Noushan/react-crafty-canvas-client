@@ -99,7 +99,9 @@ const FooTer = () => {
             </nav>
           </div>
         </div>
-        <div className="mt-8 text-center">Copyright © 2024 - All right reserved by Crafty Canvas</div>
+        <div className="mt-8 text-center">
+          Copyright © 2024 - All right reserved by Crafty Canvas
+        </div>
       </div>
     </footer>
   );

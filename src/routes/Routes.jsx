@@ -5,6 +5,7 @@ import Error from "../pages/error/Error";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/Login";
 import AuthLayout from "../layouts/AuthLayout";
+import Profile from "../pages/profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
             element: <Register />,
           },
         ],
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
