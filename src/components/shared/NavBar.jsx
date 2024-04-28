@@ -1,6 +1,8 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa6";
+import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const nestedNavlinks = () => (
   <>
@@ -63,7 +65,8 @@ const navlinks = () => (
 
 const NavBar = () => {
   const [theme, setTheme] = React.useState("light");
-  const user = null;
+  const { user, authLoading, logOut } = useAuth();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const localTheme = localStorage.getItem("theme", theme);
@@ -81,6 +84,17 @@ const NavBar = () => {
       setTheme("light");
       localStorage.setItem("theme", "light");
     }
+  };
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout successful");
+        navigate("/login");
+      })
+      .catch(() => {
+        toast.error("Something went wrong, please try again");
+      });
   };
   return (
     <section className="drawer container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
@@ -159,7 +173,9 @@ const NavBar = () => {
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </label>
-              {user ? (
+              {authLoading ? (
+                <div className="skeleton size-12 rounded-full" />
+              ) : user ? (
                 <div className="dropdown lg:dropdown-hover">
                   <div tabIndex={0} role="button" className="avatar">
                     <div className="size-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 cursor-pointer">
@@ -173,17 +189,18 @@ const NavBar = () => {
                   >
                     <Link>Profile</Link>
                     <Link>My Art & Craft List</Link>
-                    <button className="text-left">Logout</button>
+                    <button className="text-left" onClick={handleLogout}>
+                      Logout
+                    </button>
                   </ul>
                 </div>
               ) : (
                 <div className="space-x-2 text-base lg:text-xl hover:*:underline">
-                  <Link>Login</Link>
-                  <Link>Register</Link>
+                  <Link to="/login">Login</Link>
+                  <Link to="/register">Register</Link>
                 </div>
               )}
               {/* <div className="skeleton size-12 rounded-full" /> */}
-              {/* <div className="skeleton w-16 h-4 rounded-sm" /> */}
             </div>
           </div>
         </div>
