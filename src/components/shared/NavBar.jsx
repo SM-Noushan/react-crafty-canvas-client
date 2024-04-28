@@ -179,7 +179,12 @@ const NavBar = () => {
                 <div className="dropdown lg:dropdown-hover">
                   <div tabIndex={0} role="button" className="avatar">
                     <div className="size-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 cursor-pointer">
-                      <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                      <img
+                        src={
+                          user?.photoURL ||
+                          "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                        }
+                      />
                     </div>
                   </div>
 
