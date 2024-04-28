@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaCaretDown } from "react-icons/fa6";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import { ThemeContext } from "../../layouts/Root";
 
 const nestedNavlinks = () => (
   <>
@@ -64,7 +65,7 @@ const navlinks = () => (
 );
 
 const NavBar = () => {
-  const [theme, setTheme] = React.useState("light");
+  const { theme, setTheme } = useContext(ThemeContext);
   const { user, authLoading, logOut } = useAuth();
   const navigate = useNavigate();
 
@@ -73,7 +74,9 @@ const NavBar = () => {
     if (localTheme) {
       if (localTheme === "dark") setTheme("dark");
       document.querySelector("html").setAttribute("data-theme", localTheme);
-    } else document.querySelector("html").setAttribute("data-theme", "light");
+    } else {
+      document.querySelector("html").setAttribute("data-theme", "light");
+    }
   }, [theme]);
 
   const handleThemeToggle = (e) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -6,8 +6,9 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Spinner from "../../components/shared/Spinner";
-
+import { ThemeContext } from "../../layouts/Root";
 const Login = () => {
+  const { theme } = useContext(ThemeContext);
   const {
     createUserWithGoogle,
     createUserWithFacebook,
@@ -115,7 +116,8 @@ const Login = () => {
           {/* email */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text lg:text-xl">Email</span>label-text lg:text-xl
+              <span className="label-text lg:text-xl">Email</span>label-text
+              lg:text-xl
             </label>
             <input
               autoComplete="email"
@@ -123,7 +125,11 @@ const Login = () => {
               id="email"
               type="text"
               placeholder="Enter your email"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("email", {
                 required: {
                   value: true,
@@ -145,7 +151,11 @@ const Login = () => {
               id="password"
               type={passwordShown ? "text" : "password"}
               placeholder="******"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("password", {
                 required: {
                   value: true,

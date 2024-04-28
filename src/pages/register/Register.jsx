@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Spinner from "../../components/shared/Spinner";
+import { ThemeContext } from "../../layouts/Root";
 const catchError = (error) => {
   const errorCode = error.code;
   if (errorCode == "auth/email-already-in-use")
@@ -16,6 +17,7 @@ const catchError = (error) => {
 const Register = () => {
   const { user, authLoading, setAuthLoading, createUser, updateProfileInfo } =
     useAuth();
+  const { theme } = useContext(ThemeContext);
   const [passwordShown, setPasswordShown] = React.useState(false);
   const togglePasswordVisiblity = () => setPasswordShown((cur) => !cur);
   const {
@@ -73,7 +75,11 @@ const Register = () => {
               id="name"
               type="text"
               placeholder="Enter your name"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("name", {
                 required: true,
                 pattern: /(^[a-zA-Z]{2,20}[a-zA-Z\s]{0,20}[a-zA-Z]{0,20}$)/,
@@ -109,7 +115,11 @@ const Register = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("email", {
                 required: true,
                 pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
@@ -145,7 +155,11 @@ const Register = () => {
               id="photoURL"
               type="text"
               placeholder="Enter your photoURL"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("email", {
                 required: true,
                 pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
@@ -186,7 +200,11 @@ const Register = () => {
               id="password"
               type={passwordShown ? "text" : "password"}
               placeholder="******"
-              className="input input-bordered text-gray-950 text-lg"
+              className={
+                theme === "light"
+                  ? "input input-bordered text-lg text-gray-950"
+                  : "input input-bordered text-lg text-white"
+              }
               {...register("password", {
                 required: {
                   value: true,
