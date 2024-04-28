@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../components/shared/NavBar";
+import FooTer from "../components/shared/FooTer";
 
 export const ThemeContext = createContext(null);
 
@@ -10,6 +11,7 @@ const Root = () => {
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <NavBar />
       <Outlet />
+      <FooTer />
     </ThemeContext.Provider>
   );
 };
