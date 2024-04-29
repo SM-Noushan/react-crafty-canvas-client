@@ -20,7 +20,10 @@ const FeaturedCrafts = ({ item = {} }) => {
           {itemName || "Unknown"}
         </h2>
       </div>
-      <Link className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md btn btn-outline">
+      <Link
+        to={`/item/${_id}`}
+        className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md btn btn-outline"
+      >
         View Details
       </Link>
     </div>

@@ -42,12 +42,17 @@ const CraftsList = ({ crafts }) => {
                 </div>
               </td>
               <td className="capitalize">{item.userName || "Unknown"}</td>
-              <td className="capitalize hidden min-[425px]:block">{item.subCategoryName || "Others"}</td>
+              <td className="capitalize hidden min-[425px]:block">
+                {item.subCategoryName || "Others"}
+              </td>
               <td className="hidden md:block max-w-md xl:max-w-lg text-justify">
                 {item.shortDescription}
               </td>
               <th>
-                <Link className="btn btn-square  btn-outline btn-accent">
+                <Link
+                  to={`/item/${item._id}`}
+                  className="btn btn-square  btn-outline btn-accent"
+                >
                   <FaEye />
                 </Link>
               </th>
