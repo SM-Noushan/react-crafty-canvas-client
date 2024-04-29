@@ -29,7 +29,9 @@ const AddCraft = ({ update = false }) => {
     ).then((res) => {
       if (res?.data?.insertedId || res?.data?.modifiedCount) {
         if (!update) reset();
-        toast.success(`Coffee ${update ? "updated" : "added"} successfully`);
+        toast.success(
+          `Art and Craft ${update ? "updated" : "added"} successfully`
+        );
       } else toast.error("Something went wrong");
     });
   };
@@ -37,7 +39,7 @@ const AddCraft = ({ update = false }) => {
     <section className="">
       <div className="-z-10 relative">
         <Helmet>
-          <title>Add Art And Craft</title>
+          <title>Add Art and Craft</title>
         </Helmet>
         <img
           src="https://images.unsplash.com/photo-1471666875520-c75081f42081?q=80&w=1944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

@@ -1,8 +1,61 @@
 import { Link } from "react-router-dom";
 import { FaEye, FaPenClip, FaRegStar, FaTrashCan } from "react-icons/fa6";
 import PropTypes from "prop-types";
+import Swal from "sweetalert2";
+import "animate.css";
+import client from "../utils/axios";
 
-const CraftsList = ({ crafts, myCrafts = false }) => {
+const swalWithCustomButtons = Swal.mixin({
+  customClass: {
+    confirmButton: "btn btn-error text-white",
+    cancelButton: "btn btn-info text-white ml-4",
+  },
+  buttonsStyling: false,
+});
+
+const CraftsList = ({ crafts, myCrafts = false, refetch }) => {
+  const handleDelete = (id) => {
+    swalWithCustomButtons
+      .fire({
+        title: "Are you sure?",
+        text: "Are you sure that you want to delete it?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        showClass: {
+          popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `,
+        },
+        hideClass: {
+          popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `,
+        },
+      })
+      .then((result) => {
+        if (result.isConfirmed)
+          client("delete", `/painting-and-drawing/${id}`).then((res) => {
+            if (res?.data?.deletedCount) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: "Craft and Art deleted",
+                icon: "success",
+              });
+            } else
+              Swal.fire({
+                title: "Failed!",
+                text: "Something went wrong",
+                icon: "error",
+              });
+          });
+      });
+  };
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -100,12 +153,13 @@ const CraftsList = ({ crafts, myCrafts = false }) => {
                       >
                         <FaPenClip />
                       </Link>
-                      <Link
+                      <button
+                        onClick={() => handleDelete(item._id)}
                         to={`/item/${item._id}`}
                         className="btn btn-square  btn-outline btn-error"
                       >
                         <FaTrashCan />
-                      </Link>
+                      </button>
                     </>
                   )}
                 </div>
@@ -122,6 +176,7 @@ const CraftsList = ({ crafts, myCrafts = false }) => {
 CraftsList.propTypes = {
   crafts: PropTypes.array.isRequired,
   myCrafts: PropTypes.bool,
+  refetch: PropTypes.func,
 };
 
 export default CraftsList;

@@ -4,6 +4,7 @@ import FeaturedCrafts from "../../components/FeaturedCrafts";
 import client from "../../utils/axios";
 import Spinner from "../../components/shared/Spinner";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const { data: featuredCraft, isLoading: featuredCraftIsLoading } = useQuery({
@@ -17,6 +18,9 @@ const Home = () => {
     <main>
       <Banner />
       <section className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
+        <Helmet>
+          <title>CraftyCanvas</title>
+        </Helmet>
         <h1 className="text-center mb-4 text-3xl font-medium">
           Featured Crafts
         </h1>
