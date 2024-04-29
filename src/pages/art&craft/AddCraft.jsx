@@ -4,20 +4,34 @@ import { ThemeContext } from "../../layouts/Root";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import client from "../../utils/axios";
+import PropTypes from "prop-types";
 
-const AddCraft = () => {
+const AddCraft = ({ update = false }) => {
   const { user } = useAuth();
   const { theme } = React.useContext(ThemeContext);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const handleOnSubmit = (data) => {
     data.userName = user.displayName || "Unknown";
     data.userEmail = user.email || "Not Found";
     data.userUID = user.uid || "Not Found";
-    console.log(data);
+
+    // send data to server
+    client(
+      update ? "put" : "post",
+      update ? `/painting-and-drawing/${"id"}` : "/painting-and-drawing",
+      data
+    ).then((res) => {
+      if (res?.data?.insertedId || res?.data?.modifiedCount) {
+        if (!update) reset();
+        toast.success(`Coffee ${update ? "updated" : "added"} successfully`);
+      } else toast.error("Something went wrong");
+    });
   };
   return (
     <section className="">
@@ -37,7 +51,7 @@ const AddCraft = () => {
         </h1>
         <form
           onSubmit={handleSubmit(handleOnSubmit)}
-          className="card-body px-52"
+          className="card-body px-12 md:px-36 lg:px-52"
         >
           {/* image url */}
           <div className="form-control">
@@ -214,8 +228,8 @@ const AddCraft = () => {
             )}
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center md:gap-x-8">
-            {/* sub-category */}
+          <div className="flex flex-row items-center gap-x-8">
+            {/* customization */}
             <div className="form-control flex-1">
               <label className="label">
                 <span className="label-text lg:text-xl">Customization</span>
@@ -416,6 +430,7 @@ const AddCraft = () => {
                 </p>
               )}
             </div>
+
             {/* price */}
             <div className="flex-1 form-control">
               <label className="label">
@@ -464,6 +479,10 @@ const AddCraft = () => {
       </div>
     </section>
   );
+};
+
+AddCraft.propTypes = {
+  update: PropTypes.bool,
 };
 
 export default AddCraft;
