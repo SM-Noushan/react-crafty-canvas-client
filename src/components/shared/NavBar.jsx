@@ -210,7 +210,7 @@ const NavBar = () => {
                     className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 cursor-pointer text-base lg:text-xl space-y-1.5"
                   >
                     <Link to="/profile">Profile</Link>
-                    <Link>My Art & Craft List</Link>
+                    <Link to="/my-art-and-craft">My Art & Craft List</Link>
                     <button className="text-left" onClick={handleLogout}>
                       Logout
                     </button>

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { FaEye } from "react-icons/fa6";
+import { FaEye, FaPenClip, FaRegStar, FaTrashCan } from "react-icons/fa6";
 import PropTypes from "prop-types";
 
-const CraftsList = ({ crafts }) => {
+const CraftsList = ({ crafts, myCrafts = false }) => {
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -11,10 +11,21 @@ const CraftsList = ({ crafts }) => {
           <tr>
             <th>SL</th>
             <th>Craft & Art</th>
-            <th>Uploaded By</th>
-            <th className="hidden min-[425px]:block">Category</th>
-            <th className="hidden md:block">Description</th>
-            <th>View Details</th>
+            <th>{myCrafts ? "Name" : "Uploaded By"}</th>
+            {myCrafts ? (
+              <>
+                <th>Stock Status</th>
+                <th>Customization</th>
+                <th>Rating</th>
+                <th>Price</th>
+              </>
+            ) : (
+              <>
+                <th className="hidden min-[425px]:table-cell">Category</th>
+                <th className="hidden md:table-cell">Description</th>
+              </>
+            )}
+            <th>{myCrafts ? "Action" : "View Details"} </th>
           </tr>
         </thead>
         <tbody>
@@ -34,27 +45,70 @@ const CraftsList = ({ crafts }) => {
                       />
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold capitalize">
-                      {item.itemName || "Unknown"}
+                  {!myCrafts && (
+                    <div>
+                      <div className="font-bold capitalize">
+                        {item.itemName || "Unknown"}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </td>
-              <td className="capitalize">{item.userName || "Unknown"}</td>
-              <td className="capitalize hidden min-[425px]:block">
-                {item.subCategoryName || "Others"}
+              <td className="capitalize">
+                {myCrafts
+                  ? item.itemName || "Unknown"
+                  : item.userName || "Unknown"}
               </td>
-              <td className="hidden md:block max-w-md xl:max-w-lg text-justify">
-                {item.shortDescription}
-              </td>
+              {myCrafts ? (
+                <>
+                  <td className="capitalize">
+                    {item.itemCustomization || "-"}
+                  </td>
+                  <td className="capitalize">{item.itemStock || "-"}</td>
+                  <td className="capitalize">
+                    <div className="flex items-center gap-2">
+                      {item.itemRating || "0"}
+                      <FaRegStar />
+                    </div>
+                  </td>
+                  <td className="capitalize">BDT {item.itemPrice || "0"}</td>
+                </>
+              ) : (
+                <>
+                  <td className="capitalize hidden min-[425px]:table-cell">
+                    {item.subCategoryName || "Others"}
+                  </td>
+                  <td className="hidden md:table-cell max-w-md xl:max-w-lg text-justify">
+                    {item.shortDescription}
+                  </td>
+                </>
+              )}
               <th>
-                <Link
-                  to={`/item/${item._id}`}
-                  className="btn btn-square  btn-outline btn-accent"
-                >
-                  <FaEye />
-                </Link>
+                <div className="flex items-center gap-2">
+                  {!myCrafts ? (
+                    <Link
+                      to={`/item/${item._id}`}
+                      className="btn btn-square  btn-outline btn-accent"
+                    >
+                      <FaEye />
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        to={`/item/${item._id}`}
+                        className="btn btn-square  btn-outline btn-info"
+                      >
+                        <FaPenClip />
+                      </Link>
+                      <Link
+                        to={`/item/${item._id}`}
+                        className="btn btn-square  btn-outline btn-error"
+                      >
+                        <FaTrashCan />
+                      </Link>
+                    </>
+                  )}
+                </div>
               </th>
             </tr>
           ))}
@@ -67,6 +121,7 @@ const CraftsList = ({ crafts }) => {
 
 CraftsList.propTypes = {
   crafts: PropTypes.array.isRequired,
+  myCrafts: PropTypes.bool,
 };
 
 export default CraftsList;

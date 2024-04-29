@@ -3,6 +3,7 @@ import Banner from "../../components/Banner";
 import FeaturedCrafts from "../../components/FeaturedCrafts";
 import client from "../../utils/axios";
 import Spinner from "../../components/shared/Spinner";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data: featuredCraft, isLoading: featuredCraftIsLoading } = useQuery({
@@ -28,6 +29,11 @@ const Home = () => {
             ))}
           </section>
         )}
+        <div className="w-fit mx-auto">
+          <Link to="/item" className="btn btn-outline px-12 my-12">
+            See All
+          </Link>
+        </div>
       </section>
     </main>
   );

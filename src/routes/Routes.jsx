@@ -10,6 +10,7 @@ import AddCraft from "../pages/art&craft/AddCraft";
 import PrivateRoutes from "./PrivateRoutes";
 import ViewAllCraft from "../pages/art&craft/ViewAllCraft";
 import ViewDetails from "../pages/art&craft/ViewDetails";
+import MyArtAndCraftList from "../pages/art&craft/MyArtAndCraftList";
 
 export const router = createBrowserRouter([
   {
@@ -59,8 +60,20 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
       },
       {
+        path: "/my-art-and-craft",
+        element: (
+          <PrivateRoutes>
+            <MyArtAndCraftList />,
+          </PrivateRoutes>
+        ),
+      },
+      {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoutes>
+            <Profile />,
+          </PrivateRoutes>
+        ),
       },
     ],
   },
