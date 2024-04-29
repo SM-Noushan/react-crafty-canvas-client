@@ -74,6 +74,7 @@ const Profile = () => {
             className="toggle toggle-info"
           />
         </div>
+        {/* update form */}
         <form
           onSubmit={handleSubmit(handleOnSubmit)}
           className="mx-auto w-[24rem] text-left"
@@ -138,10 +139,6 @@ const Profile = () => {
                   ? "input input-bordered text-lg text-gray-950"
                   : "input input-bordered text-lg text-white"
               }
-              {...register("email", {
-                required: true,
-                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-              })}
               {...register("photoURL", {
                 required: true,
                 pattern:
@@ -166,6 +163,7 @@ const Profile = () => {
               </p>
             )}
           </div>
+          {/* update button */}
           <div className="form-control mt-6">
             <button
               className="btn btn-neutral lg:text-xl"
