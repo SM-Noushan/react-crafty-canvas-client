@@ -8,6 +8,7 @@ import AuthLayout from "../layouts/AuthLayout";
 import Profile from "../pages/profile/Profile";
 import AddCraft from "../pages/art&craft/AddCraft";
 import PrivateRoutes from "./PrivateRoutes";
+import ViewAllCraft from "../pages/art&craft/ViewAllCraft";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
             <AddCraft />,
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/item",
+        element: <ViewAllCraft />,
+        loader: () => fetch("http://localhost:6969/painting-and-drawing"),
       },
       {
         path: "/profile",

@@ -9,7 +9,7 @@ import { Tooltip } from "react-tooltip";
 const nestedNavlinks = () => (
   <>
     <NavLink
-      to="/item/view/all"
+      to="/item"
       className={({ isActive }) => (isActive ? "text-blue-500" : "")}
     >
       View All

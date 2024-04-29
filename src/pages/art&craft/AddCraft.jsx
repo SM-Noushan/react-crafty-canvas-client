@@ -45,7 +45,7 @@ const AddCraft = ({ update = false }) => {
           className="w-full h-96 object-cover object-center brightness-90"
         />
       </div>
-      <div className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz min-h-96 bg-base-300 -mt-16 py-20">
+      <div className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz bg-base-300 -mt-16 py-20">
         <h1 className="text-center font-medium text-3xl">
           Item Information: New+
         </h1>
