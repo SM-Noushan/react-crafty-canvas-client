@@ -160,10 +160,6 @@ const Register = () => {
                   ? "input input-bordered text-lg text-gray-950"
                   : "input input-bordered text-lg text-white"
               }
-              {...register("email", {
-                required: true,
-                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i,
-              })}
               {...register("photoURL", {
                 required: true,
                 pattern:
