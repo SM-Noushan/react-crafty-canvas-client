@@ -11,6 +11,7 @@ import Banner from "../../components/Banner";
 import Spinner from "../../components/shared/Spinner";
 import FeaturedCrafts from "../../components/FeaturedCrafts";
 import SubCategoryInfo from "../../components/SubCategoryInfo";
+import Feedback from "../../components/Feedback";
 
 const Home = () => {
   const { data: featuredCraft, isLoading: featuredCraftIsLoading } = useQuery({
@@ -49,48 +50,54 @@ const Home = () => {
             See All
           </Link>
         </div>
-        <h1 className="text-center mb-4 text-3xl font-medium">
-          Our Categories
-        </h1>
-        {subCategoryIsLoading ? (
-          <Spinner />
-        ) : (
-          <Swiper
-            className="mb-12 max-w-xs min-[640px]:max-w-max"
-            loop={true}
-            autoplay={{ delay: 2000 }}
-            navigation={true}
-            pagination={{
-              clickable: true,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 30,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 50,
-              },
-              1200: {
-                slidesPerView: 4,
-                spaceBetween: 50,
-              },
-            }}
-            modules={[Autoplay, Navigation, Pagination]}
-          >
-            {subCategory.map((item) => (
-              <SwiperSlide key={item._id}>
-                <SubCategoryInfo item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
       </section>
+      <section className="bg-base-200 py-14">
+        <div className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
+          <h1 className="text-center mb-4 text-3xl font-medium">
+            Our Categories
+          </h1>
+          {subCategoryIsLoading ? (
+            <Spinner />
+          ) : (
+            <Swiper
+              className="mb-12 max-w-xs min-[640px]:max-w-max"
+              loop={true}
+              autoplay={{ delay: 2000 }}
+              navigation={true}
+              pagination={{
+                clickable: true,
+              }}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 50,
+                },
+                1200: {
+                  slidesPerView: 4,
+                  spaceBetween: 50,
+                },
+              }}
+              modules={[Autoplay, Navigation, Pagination]}
+            >
+              {subCategory.map((item) => (
+                <SwiperSlide key={item._id}>
+                  <SubCategoryInfo item={item} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        </div>
+      </section>
+      <h1 className="text-center my-8 text-3xl font-medium">Feedback</h1>
+      <Feedback />
     </main>
   );
 };
