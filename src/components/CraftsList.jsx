@@ -67,8 +67,8 @@ const CraftsList = ({ crafts, myCrafts = false, refetch }) => {
             <th>{myCrafts ? "Name" : "Uploaded By"}</th>
             {myCrafts ? (
               <>
-                <th>Stock Status</th>
                 <th>Customization</th>
+                <th>Stock Status</th>
                 <th>Rating</th>
                 <th>Price</th>
               </>
