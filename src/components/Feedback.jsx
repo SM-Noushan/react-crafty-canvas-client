@@ -54,7 +54,7 @@ const Feedback = () => {
           />
         </label>
         <button
-          type="submit"
+          type="button"
           className="btn w-full btn-outline font-bold tracking-wide uppercase rounded"
         >
           Send Message
