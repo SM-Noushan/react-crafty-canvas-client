@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { ThemeContext } from "../../layouts/Root";
 import { Tooltip } from "react-tooltip";
+import { Link as LinkRS } from "react-scroll";
 
 const nestedNavlinks = () => (
   <>
@@ -50,18 +51,22 @@ const navlinks = () => (
         {nestedNavlinks()}
       </ul>
     </div>
-    <NavLink
-      to="/about-us"
-      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    <LinkRS
+      to="about-us"
+      smooth={true}
+      duration={500}
+      className={"cursor-pointer"}
     >
       About
-    </NavLink>
-    <NavLink
-      to="/contact-us"
-      className={({ isActive }) => (isActive ? "text-blue-500" : "")}
+    </LinkRS>
+    <LinkRS
+      to="feedback"
+      smooth={true}
+      duration={500}
+      className={"cursor-pointer"}
     >
-      Contact
-    </NavLink>
+      Feedback
+    </LinkRS>
   </div>
 );
 

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Element } from "react-scroll";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,6 +13,7 @@ import Spinner from "../../components/shared/Spinner";
 import FeaturedCrafts from "../../components/FeaturedCrafts";
 import SubCategoryInfo from "../../components/SubCategoryInfo";
 import Feedback from "../../components/Feedback";
+import Aboutus from "../../components/Aboutus";
 
 const Home = () => {
   const { data: featuredCraft, isLoading: featuredCraftIsLoading } = useQuery({
@@ -96,8 +98,16 @@ const Home = () => {
           )}
         </div>
       </section>
-      <h1 className="text-center my-8 text-3xl font-medium">Feedback</h1>
-      <Feedback />
+      <Element name="feedback">
+        <h1 className="text-center my-8 text-3xl font-medium">Feedback</h1>
+        <Feedback />
+      </Element>
+      <section className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz mb-12">
+        <Element name="about-us">
+          <h1 className="text-center my-8 text-3xl font-medium">About us</h1>
+          <Aboutus />
+        </Element>
+      </section>
     </main>
   );
 };
