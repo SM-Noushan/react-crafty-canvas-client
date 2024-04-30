@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { FaRegStar } from "react-icons/fa6";
 import { useLoaderData } from "react-router-dom";
 
@@ -17,6 +18,16 @@ const ViewDetails = () => {
   } = item;
   return (
     <section className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz rounded-md my-12 bg-base-300 py-16">
+      <Helmet>
+        <title>
+          {itemName
+            .split(" ")
+            .map((word) => {
+              return word[0].toUpperCase() + word.substring(1);
+            })
+            .join(" ")}
+        </title>
+      </Helmet>
       <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
         <img
           src={

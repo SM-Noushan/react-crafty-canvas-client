@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 const SubCategoryInfo = ({ item }) => {
   const { url, name, collection } = item || {};
   return (
-    <Link className="card h-80 bg-base-100 image-full">
+    <Link
+      to={`/item/category/${name}`}
+      className="card h-80 bg-base-100 image-full"
+    >
       <figure>
         <img
           src={

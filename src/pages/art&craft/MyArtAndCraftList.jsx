@@ -16,22 +16,7 @@ const MyArtAndCraftList = () => {
         (res) => res.data
       ),
   });
-  React.useEffect(() => {
-    console.log(sort);
-  }, [sort]);
-  // if (!isLoading)
-  // data.sort((d1, d2) => {
-  //   const val1 = d1.itemCustomization.toLowerCase(),
-  //     val2 = d2.itemCustomization.toLowerCase();
-  //   if (val1 < val2) {
-  //     return -1;
-  //   }
-  //   if (val1 > val2) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // });
-
+  
   return (
     <section className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz px-6 my-12">
       <Helmet>

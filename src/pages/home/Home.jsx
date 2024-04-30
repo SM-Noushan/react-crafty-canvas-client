@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Banner from "../../components/Banner";
-import client from "../../utils/axios";
-import Spinner from "../../components/shared/Spinner";
-import FeaturedCrafts from "../../components/FeaturedCrafts";
-import SubCategoryInfo from "../../components/SubCategoryInfo";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/bundle";
 import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination, Parallax } from "swiper/modules";
+import client from "../../utils/axios";
+import Banner from "../../components/Banner";
+import Spinner from "../../components/shared/Spinner";
+import FeaturedCrafts from "../../components/FeaturedCrafts";
+import SubCategoryInfo from "../../components/SubCategoryInfo";
 
 const Home = () => {
   const { data: featuredCraft, isLoading: featuredCraftIsLoading } = useQuery({
@@ -52,30 +52,44 @@ const Home = () => {
         <h1 className="text-center mb-4 text-3xl font-medium">
           Our Categories
         </h1>
-        <Swiper
-          className="mb-12"
-          loop={subCategoryIsLoading || true}
-          slidesPerView={subCategoryIsLoading ? 1 : 4}
-          spaceBetween={50}
-          autoplay={{ delay: 2000 }}
-          navigation={true}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Autoplay, Navigation, Pagination]}
-        >
-          {subCategoryIsLoading ? (
-            <SwiperSlide>
-              <Spinner />
-            </SwiperSlide>
-          ) : (
-            subCategory.map((item) => (
+        {subCategoryIsLoading ? (
+          <Spinner />
+        ) : (
+          <Swiper
+            className="mb-12 max-w-xs min-[640px]:max-w-max"
+            loop={true}
+            autoplay={{ delay: 2000 }}
+            navigation={true}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+              1200: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+              },
+            }}
+            modules={[Autoplay, Navigation, Pagination]}
+          >
+            {subCategory.map((item) => (
               <SwiperSlide key={item._id}>
                 <SubCategoryInfo item={item} />
               </SwiperSlide>
-            ))
-          )}
-        </Swiper>
+            ))}
+          </Swiper>
+        )}
       </section>
     </main>
   );

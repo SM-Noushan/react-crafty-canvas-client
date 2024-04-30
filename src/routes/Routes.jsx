@@ -11,6 +11,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import ViewAllCraft from "../pages/art&craft/ViewAllCraft";
 import ViewDetails from "../pages/art&craft/ViewDetails";
 import MyArtAndCraftList from "../pages/art&craft/MyArtAndCraftList";
+import CraftsPerCategory from "../pages/art&craft/CraftsPerCategory";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ export const router = createBrowserRouter([
         path: "/item",
         element: <ViewAllCraft />,
         loader: () => fetch("http://localhost:6969/painting-and-drawing"),
+      },
+      {
+        path: "/item/category/:categoryName",
+        element: <CraftsPerCategory />,
+        loader: ({ params }) =>
+          fetch(
+            `http://localhost:6969/painting-and-drawing/?category=${params.categoryName}`
+          ),
       },
       {
         path: "/item/:itemId",
