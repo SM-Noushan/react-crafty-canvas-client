@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { FaStar } from "react-icons/fa6";
 
-const FeaturedCrafts = ({ item = {} }) => {
-  const { _id, imageURL, itemName, userName } = item;
+const FeaturedCrafts = ({ item = {}, featured = true }) => {
+  const {
+    _id,
+    imageURL,
+    itemName,
+    userName,
+    subCategoryName,
+    shortDescription,
+    processingTime,
+    itemPrice,
+    itemRating,
+  } = item;
   return (
     <div className="max-w-xs w-full mx-auto p-6 rounded-md shadow-md">
       <div className="overflow-clip">
@@ -13,12 +24,31 @@ const FeaturedCrafts = ({ item = {} }) => {
         />
       </div>
       <div className="mt-6 mb-2">
-        <span className="block text-xs font-medium tracking-widest uppercase">
-          Uploaded By: {userName || "Unknown"}
+        <span className="text-xs font-medium tracking-widest uppercase flex justify-between items-center">
+          {featured ? (
+            <p>Uploaded By: {userName || "Unknown"}</p>
+          ) : (
+            <p> {subCategoryName || "Unknown"}</p>
+          )}
+          <p className="flex items-center">
+            {itemRating || "0"} <FaStar />
+          </p>
         </span>
         <h2 className="text-xl font-semibold tracking-wide capitalize h-14">
           {itemName || "Unknown"}
         </h2>
+        <p className="text-justify h-20">{shortDescription.slice(0, 125)}...</p>
+        <div className="flex justify-between items-center">
+          <p>
+            <span className="font-medium">Processing Time: </span>
+            {processingTime}
+          </p>
+          <p>
+            <span className="font-medium">BDT: </span>
+            {itemPrice}
+          </p>
+        </div>
+        <div className="flex"></div>
       </div>
       <Link
         to={`/item/${_id}`}
@@ -32,6 +62,7 @@ const FeaturedCrafts = ({ item = {} }) => {
 
 FeaturedCrafts.propTypes = {
   item: PropTypes.object.isRequired,
+  featured: PropTypes.bool,
 };
 
 export default FeaturedCrafts;

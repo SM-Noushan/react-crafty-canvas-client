@@ -1,8 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Parallax } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/bundle";
-import "swiper/css/pagination";
 
 const Banner = () => {
   return (
