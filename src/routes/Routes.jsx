@@ -37,10 +37,10 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "/item/add",
+        path: "/my-art-and-craft",
         element: (
           <PrivateRoutes>
-            <AddCraft />,
+            <MyArtAndCraftList />,
           </PrivateRoutes>
         ),
       },
@@ -60,12 +60,22 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
       },
       {
-        path: "/my-art-and-craft",
+        path: "/item/add",
         element: (
           <PrivateRoutes>
-            <MyArtAndCraftList />,
+            <AddCraft />,
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/item/:itemId/edit",
+        element: (
+          <PrivateRoutes>
+            <AddCraft update={true} />,
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
       },
       {
         path: "/profile",

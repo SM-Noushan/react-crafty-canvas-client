@@ -6,16 +6,32 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import client from "../../utils/axios";
 import PropTypes from "prop-types";
+import { useLoaderData, useParams } from "react-router-dom";
 
 const AddCraft = ({ update = false }) => {
+  const item = useLoaderData() || {};
+  const { itemId: _id } = useParams();
   const { user } = useAuth();
   const { theme } = React.useContext(ThemeContext);
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+  React.useEffect(() => {
+    if (update)
+      Object.keys(item).forEach((key) => {
+        if (
+          key != "_id" &&
+          key != "userName" &&
+          key != "userEmail" &&
+          key != "userUID"
+        )
+          setValue(key, item[key]);
+      });
+  }, []);
   const handleOnSubmit = (data) => {
     data.userName = user.displayName || "Unknown";
     data.userEmail = user.email || "Not Found";
@@ -24,7 +40,7 @@ const AddCraft = ({ update = false }) => {
     // send data to server
     client(
       update ? "put" : "post",
-      update ? `/painting-and-drawing/${"id"}` : "/painting-and-drawing",
+      update ? `/painting-and-drawing/${_id}` : "/painting-and-drawing",
       data
     ).then((res) => {
       if (res?.data?.insertedId || res?.data?.modifiedCount) {
@@ -49,7 +65,7 @@ const AddCraft = ({ update = false }) => {
       </div>
       <div className="container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz bg-base-300 -mt-16 py-20">
         <h1 className="text-center font-medium text-3xl">
-          Item Information: New+
+          Item Information: {update ? "Update" : "New+"}
         </h1>
         <form
           onSubmit={handleSubmit(handleOnSubmit)}
@@ -475,7 +491,9 @@ const AddCraft = ({ update = false }) => {
           </div>
 
           <div className="form-control mt-6">
-            <button className="btn btn-neutral lg:text-xl">Add Item</button>
+            <button className="btn btn-neutral lg:text-xl">
+              {update ? "Update" : "Add"} Item
+            </button>
           </div>
         </form>
       </div>

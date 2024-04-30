@@ -148,7 +148,7 @@ const CraftsList = ({ crafts, myCrafts = false, refetch }) => {
                   ) : (
                     <>
                       <Link
-                        to={`/item/${item._id}`}
+                        to={`/item/${item._id}/edit`}
                         className="btn btn-square  btn-outline btn-info"
                       >
                         <FaPenClip />
