@@ -48,15 +48,23 @@ export const router = createBrowserRouter([
       {
         path: "/item",
         element: <ViewAllCraft />,
-        loader: () => fetch("http://localhost:6969/painting-and-drawing"),
+        loader: () =>
+          fetch(
+            "https://crafty-canvas-server-side.vercel.app/painting-and-drawing"
+          ),
+        // loader: () => fetch("http://localhost:6969/painting-and-drawing"),
       },
       {
         path: "/item/category/:categoryName",
         element: <CraftsPerCategory />,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:6969/painting-and-drawing/?category=${params.categoryName}`
+            `https://crafty-canvas-server-side.vercel.app/painting-and-drawing/?category=${params.categoryName}`
           ),
+        // loader: ({ params }) =>
+        //   fetch(
+        //     `http://localhost:6969/painting-and-drawing/?category=${params.categoryName}`
+        //   ),
       },
       {
         path: "/item/:itemId",
@@ -66,7 +74,11 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
+          fetch(
+            `https://crafty-canvas-server-side.vercel.app/painting-and-drawing/${params.itemId}`
+          ),
+        // loader: ({ params }) =>
+        //   fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
       },
       {
         path: "/item/add",
@@ -84,7 +96,11 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
+          fetch(
+            `https://crafty-canvas-server-side.vercel.app/painting-and-drawing/${params.itemId}`
+          ),
+        // loader: ({ params }) =>
+        //   fetch(`http://localhost:6969/painting-and-drawing/${params.itemId}`),
       },
       {
         path: "/profile",

@@ -5,8 +5,8 @@ const client = async (req, url, data = null) => {
     const config = {
       url: url,
       method: req,
-      baseURL: "http://localhost:6969",
       data: data,
+      baseURL: "https://crafty-canvas-server-side.vercel.app",
     };
     return await axios(config);
   } catch (error) {
@@ -14,3 +14,4 @@ const client = async (req, url, data = null) => {
   }
 };
 export default client;
+// "http://localhost:6969",

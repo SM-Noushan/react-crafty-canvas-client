@@ -106,7 +106,7 @@ const NavBar = () => {
       });
   };
   return (
-    <section className="drawer container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
+    <section className="z-10 drawer container xl:max-w-screen-xl mx-auto font-yanone-kaffeesatz">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
