@@ -45,8 +45,8 @@ const Aboutus = () => {
             </Slide>
             <Fade duration={5000} triggerOnce>
               <img
-                src="https://i.ibb.co/64jS9rN/signature.png"
-                alt="crafty-craft-signature"
+                src="https://i.ibb.co/yNy0Zxj/crafty-canvas-signature.png"
+                alt="crafty-canvas-signature"
                 className="w-52 -rotate-12 mb-4 relative -left-8 -z-10"
               />
             </Fade>
